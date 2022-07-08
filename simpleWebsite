@@ -1,0 +1,13 @@
+#!/bin/bash
+yum update -y
+amzon-linux-extras install -y php
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd
+usermode -a -G apache ec2-user
+chown -R ec2-user:apache /var/www
+chmod 2775 /var/www
+find /var/www -type d -exec chmod 2775 {} \;
+find /var/www -type f -exec chmod 0664 {} \;
+wget [insert S3 url for website zip file here]
+unzip [name of website zip file] -d /var/www/html
