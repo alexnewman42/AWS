@@ -1,0 +1,11 @@
+! /bin/bash
+yum update -y
+
+# Command to install the CloudWatch agent
+sudo yum install amazon-cloudwatch-agent -y
+
+# Command to start the CloudWatch Agent
+sudo /opt/aws/amazon.cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json
+
+# Command to configure the CloudWatch agent
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard
